@@ -1,0 +1,13 @@
+{
+  "name": "teacher-awards-nominations",
+  "version": "1.0.0",
+  "url": "teacher-awards-nominations",
+  "description": "",
+  "main": "index.js",
+  "author": "Pranav Nutalapati",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
