@@ -61,3 +61,12 @@ exports.delete = async (req, res) => {
 		throw e
 	}
 }
+
+exports.show = async (req, res) => {
+	let { id } = req.params
+	let school = await School.findById(id).populate('teachers').exec()
+	if (school)
+		res.send({success: true, school})
+	else
+		res.status(404).send({success: false, message: 'teacher_not_found'})
+}

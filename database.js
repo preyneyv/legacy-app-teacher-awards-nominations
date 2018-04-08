@@ -16,10 +16,16 @@ settingsSchema.pre('save', async function() {
 	this.markModified('value')
 })
 
-// Store school details, basically just name,
-// because we need to be able to filter out the teachers.
+// Store school details - name and critera,
 let schoolSchema = new Schema({
-	name: String
+	name: String,
+	critera: [{
+		name: String,
+		rubrics: [{
+			name: String,
+			descriptions: [ String ]
+		}]
+	}]
 })
 schoolSchema.virtual('teachers', {
 	ref: 'Teacher',

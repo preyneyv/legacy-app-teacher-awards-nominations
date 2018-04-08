@@ -7,6 +7,7 @@ module.exports = app => {
 	.get(schoolsController.read)
 
 	app.route('/api/schools/:id')
+	.get(schoolsController.show)
 	.patch(schoolsController.update)
 	.delete(schoolsController.delete)
 
