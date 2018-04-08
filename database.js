@@ -26,6 +26,8 @@ schoolSchema.virtual('teachers', {
 	localField: '_id',
 	foreignField: 'school'
 })
+schoolSchema.set('toObject', { virtuals: true });
+schoolSchema.set('toJSON', { virtuals: true });
 
 // This is the teachers schema
 // Holds teacher details and pin
