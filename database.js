@@ -2,6 +2,7 @@ const config = require('./config')
 const mongoose = require('mongoose')
 const { Schema } = mongoose
 
+
 mongoose.connect(config.dbUri)
 
 let settingsSchema = new Schema({
@@ -31,6 +32,10 @@ schoolSchema.virtual('teachers', {
 let teacherSchema = new Schema({
 	name: String,
 	pin: String,
+	used: {
+		type: Boolean,
+		default: false
+	},
 	school: { type: Schema.Types.ObjectId, ref: 'School' }
 })
 
