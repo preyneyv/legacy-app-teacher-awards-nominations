@@ -62,10 +62,11 @@ h1::first-letter {
 	letter-spacing: 3px;
 	border-bottom: 1px solid rgba(0,0,0,0.15);
 	height: 50px;
-	overflow: auto;
+	overflow: hidden;
 	box-sizing: border-box;
 	position: relative;
 	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 #sidebar a.current {

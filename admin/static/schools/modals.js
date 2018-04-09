@@ -125,3 +125,66 @@ let resultsModal = new ContentModal('#results-modal', function(data) {
 	}
 
 }, function() {})
+
+
+let nominationModal = new (function(showHandler, closeHandler) {
+	let modal = $('#nomination-modal')
+	this.show = (title, data={}) => new Promise((resolve, reject) => {
+		$('body').addClass('show-modal')
+		modal.addClass('show')
+		modal.find('h1').text(title)
+		showHandler.call(modal, data)
+		$('#nomination-close').on('click', close)
+		$('#nomination-reject').on('click', function() {
+			// if (!confirm('Are you sure you want to reject this?')) return;
+			submitResponse(false, data.nomination.position, data.nomination._id, title, data.rubrics)
+		})
+		$('#nomination-accept').on('click', function() {
+			// if (!confirm('Are you sure you want to accept this?')) return;
+			submitResponse(true, data.nomination.position, data.nomination._id, title, data.rubrics)
+		})
+	})
+	function close() {
+		modal.find('*').off()
+		modal.removeClass('show')
+		$('body').removeClass('show-modal')
+	}
+	function submitResponse(status, positionId, nominationId, title, rubrics) {
+		axios.post(url(`api/positions/${positionId}/nomination`), {
+			nominationId, status
+		})
+		.then(() => axios.get(url(`api/positions/${positionId}/nomination`)))
+		.then(response => response.data)
+		.then(data => {
+			if (data.success) {
+				if (data.nomination)
+					nominationModal.show(title, {
+						nomination: data.nomination,
+						rubrics
+					})
+				else
+					close()
+			}
+		})
+	}
+})(function(data) {
+	let { nomination, rubrics } = data
+	let nominator = school.teachers.find(t => t._id == nomination.nominator)
+	let nominee = school.teachers.find(t => t._id == nomination.nominee)
+	$('#nomination-ratings tbody').empty().append(
+		nomination.ratings.map((score, i) => {
+			return $('<tr>')
+			.append(
+				$('<td>')
+				.text(rubrics[i].name)
+			)
+			.append(
+				$('<td>')
+				.text(score == 3 ? 'Excellent' : score == 2 ? 'Very Good' : 'Good')
+			)
+		})
+	)
+	$('#nomination-nominator').text(nominator.name)
+	$('#nomination-nominee').text(nominee.name)
+	$('#nomination-reason').text(nomination.reason)
+}, function() {})

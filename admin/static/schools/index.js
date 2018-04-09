@@ -250,10 +250,32 @@ let positionEvents = {
 			}
 		})
 	},
+	nominations: function() {
+		let rowIndex = $(this).data('row')
+		let row = positionsTable.row(rowIndex)
+		let id = row.data()._id;
+		let rubrics = row.data().rubrics;
+		$('#positions-table').addClass('loading')
+		axios.get(url(`api/positions/${id}/nomination`))
+		.then(response => response.data)
+		.then(data => {
+			$('#positions-table').removeClass('loading')
+			if (data.success) {
+				if (!data.nomination) return alert('No nominations to check.')
+				nominationModal.show(row.data().name, {
+					nomination: data.nomination,
+					rubrics
+				})
+			} else {
+				alert('Server says ' + data.message)
+			}
+		})
+	},
 	bindRow: function($row) {
 		$row.find('.position-edit').off().on('click', this.edit)
 		$row.find('.position-delete').off().on('click', this.delete)
 		$row.find('.view-results').off().on('click', this.results)
+		$row.find('.view-nominations').off().on('click', this.nominations)
 	}
 }
 function drawPositionsTable() {
@@ -264,6 +286,11 @@ function drawPositionsTable() {
 			{
 				render: (data, type, row, meta) => {
 					return `<button data-row='${meta.row}' class='view-results'>View</button>`
+				}
+			},
+			{
+				render: (data, type, row, meta) => {
+					return `<button data-row='${meta.row}' class='view-nominations'>View</button>`
 				}
 			},
 			{
@@ -283,9 +310,10 @@ function drawPositionsTable() {
 				className: 'actions'
 			},
 			{
-				targets: -2,
+				targets: [-2, -3],
 				sortable: false,
-				searchable: false
+				searchable: false,
+				className: 'view-buttons'
 			}
 		],
 		autoWidth: false,
@@ -293,6 +321,7 @@ function drawPositionsTable() {
 			$("#positions-table .position-edit").off().on('click', positionEvents.edit)
 			$("#positions-table .position-delete").off().on('click', positionEvents.delete)
 			$("#positions-table .view-results").off().on('click', positionEvents.results)
+			$("#positions-table .view-nominations").off().on('click', positionEvents.nominations)
 		}
 	})
 }

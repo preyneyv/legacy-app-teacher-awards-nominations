@@ -24,7 +24,7 @@
 				Teacher<br>Awards<br>Nominations
 			</div>
 		</div>
-		<a href="../../">Nominations</a>
+		<a href="../../">Home</a>
 		<a id="loading-schools">Loading Schools...</a>
 		<a id="add-school"><i class="material-icons">add</i> Add</a>
 	</div>
@@ -40,12 +40,13 @@
 					<tr>
 						<th>Name</th>
 						<th>Results</th>
+						<th>Nominations</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
 				<tfoot>
 					<tr>
-						<th colspan="2" class="no-pointer"></th>
+						<th colspan="3" class="no-pointer"></th>
 						<th><i id="create-position" class="material-icons">add</i></th>
 					</tr>
 				</tfoot>
@@ -160,6 +161,36 @@
 			</table>
 			<div class="modal-footer">
 				<button class="modal-primary">Close</button>
+			</div>
+		</div>
+	</div>
+	<div class="modal" id="nomination-modal">
+		<i class="material-icons modal-close">close</i>
+		<div id="nomination-modal-content">
+			<h1></h1>
+			<div id="nomination-container">
+				<div>
+					<div id="nomination-nominator">Bob</div>
+					<div id="nomination-nominee">Joe</div>
+					<table id="nomination-ratings">
+						<thead>
+							<tr>
+								<th>Critera</th>
+								<th>Rating</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<div id="nomination-reason">Because why not!</div>
+				</div>
+				<div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="modal-button" id="nomination-close">Close</button>
+				<button id="nomination-reject" class="modal-button">Reject</button>
+				<button id="nomination-accept" class="modal-primary">Accept</button>
 			</div>
 		</div>
 	</div>

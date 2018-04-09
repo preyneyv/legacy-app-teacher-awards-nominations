@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Teacher Award Nominations</title>
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700,900|Material+Icons" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<script src="index.js" defer></script>
+</head>
+<body class="">
+	<script type="text/x-handlebars-template" id="voting-table">
+		{{#each rubrics}}
+		<tr>
+			<td>{{name}}</td>
+			<td>
+				<input type='radio'
+				id='{{@index}}-0'
+				name='{{@index}}'
+				value='3'
+				required />
+				<label for='{{@index}}-0'>
+					{{excellent}}
+				</label>
+			</td>
+			<td>
+				<input type='radio'
+				id='{{@index}}-1'
+				name='{{@index}}'
+				value='2'
+				required />
+				<label for='{{@index}}-1'>
+					{{veryGood}}
+				</label>
+			</td>
+			<td>
+				<input type='radio'
+				id='{{@index}}-2'
+				name='{{@index}}'
+				value='1'
+				required />
+				<label for='{{@index}}-2'>
+					{{good}}
+				</label>
+			</td>
+		</tr>
+		{{/each}}
+	</script>
+	<div id="background"></div>
+	<div id="container">
+		<div id="login-content">
+			<div id="app-title">
+				Teacher Award Nominations
+			</div>
+			<div id="form-container">
+				<form>
+					<label for="pin-input">Enter your pin</label>
+					<input size="5"
+					autofocus
+					placeholder="XXXX"
+					type="text"
+					id="pin-input">
+				</form>
+			</div>
+		</div>
+		<div id="page">
+			<div class="page-buttons">
+				<button id="abstain-button">Abstain</button>
+				<button class="primary" form="page-form" 
+				id="submit-button">Submit</button>
+			</div>
+			<h1 class="page-header">
+				Test Header
+			</h1>
+			<div class="page-content">
+				<form id="page-form">
+					<select name="nominee" required id="nominee">
+						<option value="" selected disabled>Select a nominee</option>
+					</select>
+					<table id="rubrics-table">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Excellent</th>
+								<th>Very Good</th>
+								<th>Good</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<textarea name='comments'
+					required id="comments"
+					placeholder="Reason for nomination"></textarea>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

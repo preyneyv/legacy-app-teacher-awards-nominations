@@ -1,6 +1,7 @@
 const teachersController = require('../controllers/teachersController')
 const schoolsController = require('../controllers/schoolsController')
 const positionsController = require('../controllers/positionsController')
+const nominationsController = require('../controllers/nominationsController')
 
 module.exports = app => {
 	app.route('/api/schools')
@@ -20,6 +21,9 @@ module.exports = app => {
 	.patch(positionsController.update)
 	.delete(positionsController.delete)
 	.get(positionsController.show)
+	app.route('/api/positions/:id/nomination')
+	.get(nominationsController.get)
+	.post(nominationsController.submit)
 
 	app.route('/api/teachers')
 	.post(teachersController.create)

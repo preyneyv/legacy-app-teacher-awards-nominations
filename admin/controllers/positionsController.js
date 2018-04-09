@@ -1,4 +1,4 @@
-const { Teacher, School, Position, Settings } = require('../../database')
+const { Teacher, School, Position, Nomination, Settings } = require('../../database')
 
 exports.create = async (req, res) => {
 	// Create new position

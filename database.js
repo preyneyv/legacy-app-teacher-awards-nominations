@@ -35,6 +35,11 @@ positionSchema.virtual('nominations', {
 	localField: '_id',
 	foreignField: 'position'
 })
+positionSchema.virtual('abstains', {
+	ref: 'Abstain',
+	localField: '_id',
+	foreignField: 'position'
+})
 
 // Store every nomination here
 let nominationSchema = new Schema({
@@ -75,12 +80,29 @@ let teacherSchema = new Schema({
 	},
 	school: { type: Schema.Types.ObjectId, ref: 'School' }
 }, schemaOptions)
+teacherSchema.virtual('nominations', {
+	ref: 'Nomination',
+	localField: '_id',
+	foreignField: 'nominator'
+})
+teacherSchema.virtual('abstains', {
+	ref: 'Abstain',
+	localField: '_id',
+	foreignField: 'nominator'
+})
+
+let abstainSchema = new Schema({
+	position: { type: Schema.Types.ObjectId, ref: 'Position' },
+	nominator: { type: Schema.Types.ObjectId, ref: 'Teacher' },
+	reason: String
+}, schemaOptions)
 
 module.exports = {
 	School: mongoose.model('School', schoolSchema),
 	Position: mongoose.model('Position', positionSchema),
 	Nomination: mongoose.model('Nomination', nominationSchema),
 	Teacher: mongoose.model('Teacher', teacherSchema),
+	Abstain: mongoose.model('Abstain', abstainSchema),
 
 	Settings: mongoose.model('Settings', settingsSchema)
 }

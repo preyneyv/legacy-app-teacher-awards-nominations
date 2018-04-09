@@ -60,6 +60,9 @@ i.material-icons {
 .actions {
 	width: 1%;
 }
+.view-buttons {
+	width: 200px;
+}
 .dataTable button {
 	-webkit-appearance: none;
 	appearance: none;
@@ -169,4 +172,26 @@ table:not(.dataTable) tr:nth-child(2n-1) td {
 #results-table tr:nth-child(3) td:not(.no-more):first-child {background-image: url(./bronze-medal.svg)}
 #results-table td.no-more {
 	text-align: center;
+}
+
+#nomination-modal-content {
+	width: 500px;
+}
+#nomination-container {
+	display: flex;
+}
+#nomination-container :first-child {
+	flex: 1 1 auto;
+}
+#nomination-nominee::before {
+	content: 'Nominee: ';
+	font-weight: bold;
+}
+#nomination-nominator::before {
+	content: 'Nominator: ';
+	font-weight: bold;
+}
+#nomination-reason::before {
+	content: 'Reason: ';
+	font-weight: bold;
 }

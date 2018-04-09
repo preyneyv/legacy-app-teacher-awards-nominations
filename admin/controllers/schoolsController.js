@@ -75,8 +75,9 @@ exports.show = async (req, res) => {
 	.populate('teachers')
 	.populate('positions')
 	.exec()
-	if (school)
+	if (school) {
 		res.send({success: true, school})
-	else
+	} else {
 		res.status(404).send({success: false, message: 'teacher_not_found'})
+	}
 }
