@@ -38,11 +38,14 @@ exports.update = async (req, res) => {
 }
 
 exports.delete = async (req, res) => {
-	// Delete a school by id
+	// Delete a position by id
 	let { id } = req.params
 
 	try {
 		let position = await Position.findByIdAndRemove(id)
+		await Nomination.remove({
+			position: position._id
+		})
 		if (position)
 			res.send({success: true})
 		else 

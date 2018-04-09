@@ -1,4 +1,4 @@
-const { Teacher, School, Settings } = require('../../database')
+const { Teacher, School, Nomination, Settings } = require('../../database')
 
 exports.create = async (req, res) => {
 	// Create new teacher
@@ -72,6 +72,12 @@ exports.delete = async (req, res) => {
 
 	try {
 		let teacher = await Teacher.findByIdAndRemove(id)
+		await Nomination.remove({
+			$or: [
+				{nominee: teacher._id},
+				{nominator: teacher._id}
+			]
+		})
 		if (teacher)
 			res.send({success: true})
 		else 
