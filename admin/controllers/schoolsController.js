@@ -1,4 +1,4 @@
-const { Teacher, School, Settings } = require('../../database')
+const { Teacher, School, Position, Nomination, Settings } = require('../../database')
 
 exports.create = async (req, res) => {
 	// Create new school
@@ -18,7 +18,7 @@ exports.create = async (req, res) => {
 exports.read = async (req, res) => {
 	// List schools
 	let teachers = 'teachers' in req.get
-	let schoolsQ = School.find()
+	let schoolsQ = School.find().sort({name: -1})
 	if (teachers)
 		schoolsQ.populate('teachers')
 
@@ -52,6 +52,12 @@ exports.delete = async (req, res) => {
 
 	try {
 		let school = await School.findByIdAndRemove(id)
+		await Teacher.remove({school: school._id})
+		let positions = await Position.find({school: school._id})
+		await Position.remove({school: school._id})
+		await Nomination.remove({
+			position: { $in: positions.map(position => position._id) }
+		})
 		if (school)
 			res.send({success: true})
 		else 
@@ -64,7 +70,11 @@ exports.delete = async (req, res) => {
 
 exports.show = async (req, res) => {
 	let { id } = req.params
-	let school = await School.findById(id).populate('teachers').exec()
+	let school = await School
+	.findById(id)
+	.populate('teachers')
+	.populate('positions')
+	.exec()
 	if (school)
 		res.send({success: true, school})
 	else

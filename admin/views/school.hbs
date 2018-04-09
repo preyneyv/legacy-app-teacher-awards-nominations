@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<title>Teacher Awards Nominations</title>
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700,900|Material+Icons" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+	<script src="../../modalclass.js" defer></script>
+	<script src="../modals.js" defer></script>
+	<script src="../index.js" defer></script>
+	<script src="../../sidebar.js" defer></script>
+	<link rel="stylesheet" type="text/css" href="../../theme.css">
+	<link rel="stylesheet" type="text/css" href="../index.css">
+</head>
+<body>
+	<div id="sidebar">
+		<div id="app-title">
+			<div class="app-title-wrapper">
+				Teacher<br>Awards<br>Nominations
+			</div>
+		</div>
+		<a href="../../">Nominations</a>
+		<a id="loading-schools">Loading Schools...</a>
+		<a id="add-school"><i class="material-icons">add</i> Add</a>
+	</div>
+	<header>
+		<input type="text" id="school-name" value="{{school.name}}">
+		<i id="school-delete" class="material-icons">delete</i>
+	</header>
+	<div id="content">
+		<div class="table-wrapper">
+			<h1>Positions</h1>
+			<table class="dt" id="positions-table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Results</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th colspan="2" class="no-pointer"></th>
+						<th><i id="create-position" class="material-icons">add</i></th>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		<div class="table-wrapper">
+			<h1>Teachers</h1>
+			<table class="dt" id="teachers-table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Pin</th>
+						<th>Used</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th colspan="3" class="no-pointer"></th>
+						<th><i id="create-teacher" class="material-icons no-pointer">add</i></th>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+	<div class="modal" id="rename-modal">
+		<i class="material-icons modal-close">close</i>
+		<div id="rename-modal-content">
+			<h1></h1>
+			<form id="rename-modal-form">
+				<label for="rename-name">Name</label>
+				<input type="text"
+				id="rename-name"
+				required 
+				name="name">
+			</form>
+			<div class="modal-footer">
+				<button class="modal-button modal-cancel">Cancel</button>
+				<button form="rename-modal-form" class="modal-primary modal-save">Save</button>
+			</div>
+		</div>
+	</div>
+	<div class="modal" id="new-position-modal">
+		<i class="material-icons modal-close">close</i>
+		<div id="new-position-modal-content">
+			<h1></h1>
+			<form id="new-position-modal-form">
+				<label for="new-position-name">Name</label>
+				<input type="text"
+				id="new-position-name"
+				required 
+				name="name">
+				<label>Rubrics</label>
+				<table id="new-position-rubrics">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Excellent</th>
+							<th>Very Good</th>
+							<th>Good</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<input placeholder="Rubric Name" type="text" value="Name" />
+							</td>
+							<td>
+								<textarea placeholder="Description"></textarea>
+							</td>
+							<td>
+								<textarea placeholder="Description"></textarea>
+							</td>
+							<td>
+								<textarea placeholder="Description"></textarea>
+							</td>
+							<td class="actions">
+								<i class="material-icons delete-row">delete</i>
+							</td>
+						</tr>
+
+					</tbody>
+					<tfoot>
+						<tr>
+							<th colspan="5">
+								<i id="add-rubric" class="material-icons">add</i>
+							</th>
+						</tr>
+					</tfoot>
+				</table>
+			</form>
+			<div class="modal-footer">
+				<button class="modal-button modal-cancel">Cancel</button>
+				<button form="new-position-modal-form" class="modal-primary modal-save">Save</button>
+			</div>
+		</div>
+	</div>
+	<div class="modal" id="results-modal">
+		<i class="material-icons modal-close">close</i>
+		<div id="results-modal-content">
+			<h1></h1>
+			<table id="results-table">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Name</th>
+						<th>Score</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+			<div class="modal-footer">
+				<button class="modal-primary">Close</button>
+			</div>
+		</div>
+	</div>
+	<div class="modal" id="add-school-modal">
+		<i class="material-icons modal-close">close</i>
+		<div id="add-school-modal-content">
+			<h1></h1>
+			<form id="add-school-modal-form">
+				<label for="add-school-name">Name</label>
+				<input type="text"
+				id="add-school-name"
+				required 
+				name="name">
+			</form>
+			<div class="modal-footer">
+				<button class="modal-button modal-cancel">Cancel</button>
+				<button form="add-school-modal-form" class="modal-primary modal-save">Save</button>
+			</div>
+		</div>
+	</div>
+	<script>let schoolId = "{{school._id}}"</script>
+</body>
+</html>

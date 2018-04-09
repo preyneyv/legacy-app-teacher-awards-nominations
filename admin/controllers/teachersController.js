@@ -36,11 +36,15 @@ exports.read = async (req, res) => {
 exports.show = async (req, res) => {
 	// Show one teacher, with school
 	let { id } = req.params
-	let teacher = await Teacher.findById(id).populate('school').exec()
-	if (teacher)
-		res.send({success: true, teacher})
-	else
+	try {
+		let teacher = await Teacher.findById(id).exec()
+		if (teacher)
+			res.send({success: true, teacher})
+		else
+			res.status(404).send({success: false, message: 'teacher_not_found'})
+	} catch (e) {
 		res.status(404).send({success: false, message: 'teacher_not_found'})
+	}
 }
 
 exports.update = async (req, res) => {

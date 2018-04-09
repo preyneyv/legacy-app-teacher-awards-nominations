@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<title>Teacher Awards Nominations</title>
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700,900|Material+Icons" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script src="modalclass.js" defer></script>
+	<script src="index.js" defer></script>
+	<script src="sidebar.js" defer></script>
+	<link rel="stylesheet" type="text/css" href="theme.css">
+	<link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+	<div id="sidebar">
+		<div id="app-title">
+			<div class="app-title-wrapper">
+				Teacher<br>Awards<br>Nominations
+			</div>
+		</div>
+		<a class="current" href="./">Nominations</a>
+		<a id="loading-schools">Loading Schools...</a>
+		<a id="add-school"><i class="material-icons">add</i> Add</a>
+	</div>
+	<header>Nominations</header>
+	<div id="content">
+
+	</div>
+	<div class="modal" id="add-school-modal">
+		<i class="material-icons modal-close">close</i>
+		<div id="add-school-modal-content">
+			<h1></h1>
+			<form id="add-school-modal-form">
+				<label for="add-school-name">Name</label>
+				<input type="text"
+				id="add-school-name"
+				required 
+				name="name">
+			</form>
+			<div class="modal-footer">
+				<button class="modal-button modal-cancel">Cancel</button>
+				<button form="add-school-modal-form" class="modal-primary modal-save">Save</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

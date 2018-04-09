@@ -1,5 +1,6 @@
 const teachersController = require('../controllers/teachersController')
 const schoolsController = require('../controllers/schoolsController')
+const positionsController = require('../controllers/positionsController')
 
 module.exports = app => {
 	app.route('/api/schools')
@@ -11,6 +12,14 @@ module.exports = app => {
 	.patch(schoolsController.update)
 	.delete(schoolsController.delete)
 
+
+	app.route('/api/positions')
+	.post(positionsController.create)
+
+	app.route('/api/positions/:id')
+	.patch(positionsController.update)
+	.delete(positionsController.delete)
+	.get(positionsController.show)
 
 	app.route('/api/teachers')
 	.post(teachersController.create)
