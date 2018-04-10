@@ -2,6 +2,7 @@ const teachersController = require('../controllers/teachersController')
 const schoolsController = require('../controllers/schoolsController')
 const positionsController = require('../controllers/positionsController')
 const nominationsController = require('../controllers/nominationsController')
+const importExportController = require('../controllers/importExportController')
 
 module.exports = app => {
 	app.route('/api/schools')
@@ -35,4 +36,5 @@ module.exports = app => {
 	.delete(teachersController.delete)
 
 	app.post('/api/teachers/:id/reset', teachersController.resetPin)
+
 }

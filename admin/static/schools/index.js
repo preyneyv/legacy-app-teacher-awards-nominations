@@ -374,3 +374,25 @@ $("#school-delete").on('click', function() {
 		throw e
 	})
 })
+
+$("#import-teachers-form").on('submit', function(e) {
+	e.preventDefault()
+	e.stopPropagation()
+	if (!confirm('Are you sure you want to import this?')) return;
+	let file = $('#import-teachers-input')[0].files[0]
+	let fd = new FormData()
+	fd.append('teachers', file)
+	axios.post('import', fd)
+	.then(response => response.data)
+	.then(data => {
+		if (data.success) {
+			alert('Successfully imported')
+			window.location.reload()
+		} else
+			alert("Server says " + data.message)
+	})
+	.catch(e => {
+		alert('An error occured! Check the console for details.')
+		throw e
+	})
+})

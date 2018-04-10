@@ -54,7 +54,7 @@ i.material-icons {
 	height: 100%;
 	cursor: wait;
 }
-.table-wrapper {
+.section {
 	margin-bottom: 64px;
 }
 .actions {
@@ -194,4 +194,16 @@ table:not(.dataTable) tr:nth-child(2n-1) td {
 #nomination-reason::before {
 	content: 'Reason: ';
 	font-weight: bold;
+}
+
+#download-button {
+	display: inline-block;
+	margin-top: 16px;
+	font: inherit;
+	text-decoration: none;
+	text-transform: uppercase;
+	background: var(--highlight);
+	color: white;
+	padding: 8px 10px;
+	box-shadow: 0px 3px 6px rgba(0,0,0,0.15);
 }

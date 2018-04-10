@@ -33,7 +33,7 @@
 		<i id="school-delete" class="material-icons">delete</i>
 	</header>
 	<div id="content">
-		<div class="table-wrapper">
+		<div class="section">
 			<h1>Positions</h1>
 			<table class="dt" id="positions-table">
 				<thead>
@@ -52,7 +52,7 @@
 				</tfoot>
 			</table>
 		</div>
-		<div class="table-wrapper">
+		<div class="section">
 			<h1>Teachers</h1>
 			<table class="dt" id="teachers-table">
 				<thead>
@@ -70,6 +70,15 @@
 					</tr>
 				</tfoot>
 			</table>
+		</div>
+		<div class="section">
+			<h1>Import/Export</h1>
+			<div>Import teachers file:</div>
+			<form id="import-teachers-form">
+				<input required type="file" id="import-teachers-input">
+				<input type="submit" value="Import">
+			</form>
+			<a id="download-button" href="export" download>Download Data</a>
 		</div>
 	</div>
 	<div class="modal" id="rename-modal">
