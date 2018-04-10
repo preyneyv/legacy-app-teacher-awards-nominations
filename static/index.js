@@ -95,6 +95,8 @@ function showPosition(position) {
 	console.log(position)
 	let table = votingTemplate(position)
 	$("#rubrics-table tbody").empty().append(table)
+	$("#nominee").val('')
+	$("#comments").val('')
 	resizeTable()
 }
 
