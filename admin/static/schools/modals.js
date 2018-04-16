@@ -157,13 +157,15 @@ let nominationModal = new (function(showHandler, closeHandler) {
 		.then(response => response.data)
 		.then(data => {
 			if (data.success) {
-				if (data.nomination)
+				if (data.nomination) {
+					close()
 					nominationModal.show(title, {
 						nomination: data.nomination,
 						rubrics
 					})
-				else
+				} else {
 					close()
+				}
 			}
 		})
 	}
