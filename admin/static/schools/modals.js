@@ -150,10 +150,10 @@ let nominationModal = new (function(showHandler, closeHandler) {
 		$('body').removeClass('show-modal')
 	}
 	function submitResponse(status, positionId, nominationId, title, rubrics) {
-		axios.post(url(`api/positions/${positionId}/nomination`), {
+		axios.post(url(`api/positions/${positionId}/nomination/?${Date.now()}`), {
 			nominationId, status
 		})
-		.then(() => axios.get(url(`api/positions/${positionId}/nomination`)))
+		.then(() => axios.get(url(`api/positions/${positionId}/nomination/?${Date.now()}`)))
 		.then(response => response.data)
 		.then(data => {
 			if (data.success) {
