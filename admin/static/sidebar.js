@@ -1,3 +1,4 @@
+
 let url = path => {
 	let dirs = baseUrl.split('/').length - 1
 	for (var i = dirs - 1; i >= 0; i--)
