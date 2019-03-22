@@ -8,12 +8,20 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "@babel/preset-es2015": "^7.0.0-beta.53",
     "archiver": "^2.1.1",
+    "babel-preset-env": "^1.7.0",
     "exceljs": "^1.1.1",
     "express": "^4.16.3",
     "express-fileupload": "^0.4.0",
     "hbs": "^4.0.1",
     "mongoose": "^5.0.13",
     "papaparse": "^4.3.7"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/standalone": "^7.4.2"
   }
 }
