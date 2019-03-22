@@ -51,6 +51,7 @@ function drawTables() {
 				$('#positions-table').addClass('loading')
 				return axios.post(url('api/positions'), {
 					name: data.name,
+					description: data.description,
 					rubrics: data.rubrics,
 					schoolId
 				})
@@ -184,6 +185,7 @@ let positionEvents = {
 		let row = positionsTable.row(rowIndex)
 		positionModal.show('Edit Position', {
 			name: row.data().name,
+			description: row.data().description,
 			rubrics: row.data().rubrics
 		})
 		.then((data) => {

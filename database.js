@@ -24,6 +24,7 @@ settingsSchema.pre('save', async function() {
 let positionSchema = new Schema({
 	school: { type: Schema.Types.ObjectId, ref: 'School' },
 	name: String,
+	description: String,
 	rubrics: [{
 		name: String,
 		descriptions: [ String ]

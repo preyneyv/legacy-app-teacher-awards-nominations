@@ -111,6 +111,18 @@ table:not(.dataTable) tr:nth-child(2n-1) td {
 	background: rgba(0,0,0,0.07);
 }
 
+#new-position-description {
+	display: block;
+	width: 100%;
+	resize: vertical;
+	box-sizing: border-box;
+	border: 0;
+	border-bottom: 2px solid var(--highlight);
+	padding: 8px;
+	font: inherit;
+	margin-bottom: 16px;
+}
+
 #new-position-rubrics td {padding: 0;}
 #new-position-rubrics input,
 #new-position-rubrics textarea {

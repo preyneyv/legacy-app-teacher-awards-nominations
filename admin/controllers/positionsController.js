@@ -2,9 +2,10 @@ const { Teacher, School, Position, Nomination, Settings } = require('../../datab
 
 exports.create = async (req, res) => {
 	// Create new position
-	let { name, rubrics, schoolId } = req.post
+	let { name, description, rubrics, schoolId } = req.post
 	let position = new Position({
 		name,
+		description,
 		rubrics,
 		school: schoolId
 	})
@@ -19,12 +20,13 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
 	// Update position details
-	let { name, rubrics } = req.post
+	let { name, description, rubrics } = req.post
 	let { id } = req.params
 
 	try {
 		let position = await Position.findByIdAndUpdate(id, {
 			...(name ? { name } : {}),
+			...(description ? { description } : {}),
 			...(rubrics ? { rubrics } : {})
 		}, {new: true})
 		if (position)

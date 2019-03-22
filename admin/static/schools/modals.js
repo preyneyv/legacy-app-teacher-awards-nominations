@@ -72,6 +72,7 @@ function addRubricRow(rubric={}, autofocus=true) {
 $("#add-rubric").on('click', () => addRubricRow())
 let positionModal = new FormModal('#new-position-modal', function(data) {
 	this.find('[name=name]').val(data.name)
+	this.find('[name=description]').val(data.description)
 	this.find('tbody tr').remove()
 	if (!data.rubrics) return addRubricRow({},false);
 
@@ -80,6 +81,7 @@ let positionModal = new FormModal('#new-position-modal', function(data) {
 }, function() {
 	let output = {}
 	output.name = this.find('[name=name]').val()
+	output.description = this.find('[name=description]').val()
 	output.rubrics = []
 	this.find('#new-position-rubrics tbody tr').each(function() {
 		let name = $(this).find('.rubric-name').val()

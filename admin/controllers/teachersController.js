@@ -1,4 +1,4 @@
-const { Teacher, School, Nomination, Settings } = require('../../database')
+const { Teacher, School, Nomination, Abstain, Settings } = require('../../database')
 
 exports.create = async (req, res) => {
 	// Create new teacher
@@ -94,6 +94,8 @@ exports.resetPin = async (req, res) => {
 
 	try {
 		let teacher = await Teacher.findByIdAndUpdate(id, { used: false })
+		await Nomination.remove({nominator: teacher._id})
+		await Abstain.remove({nominator: teacher._id})
 		if (teacher)
 			res.send({success: true})
 		else
