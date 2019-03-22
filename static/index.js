@@ -128,7 +128,7 @@ function nextView() {
 	if (currentIndex == school.positions.length) {
 		// We're done!
 		alert('Thank you for participating!')
-		$('body').empty()
+		window.location.reload();
 		return
 	}
 	showPosition(school.positions[currentIndex])
