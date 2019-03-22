@@ -29,6 +29,23 @@ exports.import = async (req, res) => {
 	res.send({success: true})
 }
 
+exports.pins = async (req, res) => {
+	let teachers = (await Teacher.find({ school: req.params.id })).map(t => ({
+		name: t.name,
+		pin: t.pin
+	}));
+	let { name } = (await School.findById(req.params.id))
+	// response.setHeader('content-disposition', 'attachment; filename=testing.csv');
+	// res.writeHead(200, {
+	// 	'Content-Disposition': `attachment; filename=pins.csv`,
+	// 	'Content-Type': 'text/csv'
+	// });
+	// res.send(Papa.unparse(teachers))
+	// res.close()
+	res.attachment(`${name} Pins.csv`);
+	res.status(200).send(Papa.unparse(teachers))
+}
+
 exports.export = async (req, res) => {
 	let school = req.params.id
 	let name = (await School.findById(school)).name
