@@ -92,6 +92,7 @@ $(window).on('resize', resizeTable)
 
 function showPosition(position) {
 	$('.page-header').text(position.name)
+	$('.page-description span').text(position.description)
 	console.log(position)
 	let table = votingTemplate(position)
 	$("#rubrics-table tbody").empty().append(table)

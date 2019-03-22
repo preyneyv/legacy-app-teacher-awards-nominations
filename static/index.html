@@ -10,7 +10,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="index.css">
-	<script src="index.comp.js" defer></script>
+	<!-- <script src="index.comp.js" defer></script> -->
+	<script src="index.js" defer></script>
 </head>
 <body class="">
 	<script type="text/x-handlebars-template" id="voting-table">
@@ -68,19 +69,21 @@
 			</div>
 		</div>
 		<div id="page">
-			<div class="page-buttons">
-				<button id="abstain-button">Abstain</button>
-				<button class="primary" form="page-form" 
-				id="submit-button">Submit</button>
-			</div>
 			<h1 class="page-header">
 				Test Header
 			</h1>
+			<div class="page-description">
+				<span></span>
+			</div>
 			<div class="page-content">
 				<form id="page-form">
-					<select name="nominee" required id="nominee">
-						<option value="" selected disabled>Select a nominee</option>
-					</select>
+					<div>
+						<select name="nominee" required id="nominee">
+							<option value="" selected disabled>Select a nominee</option>
+						</select>
+						<span class="or">or</span>
+						<button class="button" id="abstain-button">Abstain</button>
+					</div>
 					<table id="rubrics-table">
 						<thead>
 							<tr>
@@ -97,6 +100,9 @@
 					required id="comments"
 					placeholder="Reason for nomination"></textarea>
 				</form>
+			</div>
+			<div class="page-footer">
+				<button class="primary button" form="page-form" id="submit-button">Submit</button>
 			</div>
 		</div>
 	</div>
